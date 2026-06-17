@@ -13,29 +13,28 @@ A differential-drive autonomous mobile robot framework designed and implemented 
 
 ## 🛠️ System Architecture
 
-[ LiDAR ]      [ Wheel Encoders ]
-       │                 │
-       ▼                 ▼
- [ slam_toolbox ] [ robot_localization ]
-       │                 │
-       ▼                 ▼
- [ /map topic ]    [ /odom topic ]
-       │                 │
-       ▼                 ▼
- ┌──────────────────────────────────────────────┐
- │              Nav2 Navigation Stack           │
- │  (Global/Local Planners & Costmap Recovery)  │
- └──────────────────────┬───────────────────────┘
-                        │
-                        ▼
-                [ /cmd_vel topic ]
-                        │
-                        ▼
-     [ Raspberry Pi High-Level Controller ]
-                        │
-                        ▼
-      [ L298N H-Bridge Driver / DC Motors ]
+```mermaid
+graph TD
+    %% Define Nodes
+    L[LiDAR] --> ST[slam_toolbox]
+    IMU[MPU6050 IMU] --> RL[robot_localization]
+    WE[Wheel Encoders] --> RL
+    
+    ST --> MAP[/map topic/]
+    RL --> ODOM[/odom topic/]
+    
+    MAP --> NAV2[Nav2 Navigation Stack<br>Global/Local Planners & Costmap Recovery]
+    ODOM --> NAV2
+    
+    NAV2 --> CMD[/cmd_vel topic/]
+    
+    CMD --> RPi[Raspberry Pi High-Level Controller]
+    RPi --> MOT[L298N H-Bridge Driver / DC Motors]
 
+    %% Styling
+    style NAV2 fill:#1f4e79,stroke:#fff,stroke-width:2px,color:#fff
+    style RPi fill:#a020f0,stroke:#fff,stroke-width:1px,color:#fff
+```
 
 ## 📁 Repository Structure
 * `my_robot_params.yaml`: Contains tuned costmap parameters, AMCL configuration, and planner settings for the Nav2 stack.
