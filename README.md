@@ -17,7 +17,6 @@ A differential-drive autonomous mobile robot framework designed and implemented 
 graph TD
     %% Define Nodes
     L[LiDAR] --> ST[slam_toolbox]
-    IMU[MPU6050 IMU] --> RL[robot_localization]
     WE[Wheel Encoders] --> RL
     
     ST --> MAP[/map topic/]
