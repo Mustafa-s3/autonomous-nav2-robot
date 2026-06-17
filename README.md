@@ -38,9 +38,9 @@ A differential-drive autonomous mobile robot framework designed and implemented 
 
 
 ## 📁 Repository Structure
-* `/config`: Contains tuned costmap parameters, AMCL configuration, and planner settings for the Nav2 stack.
-* `/launch`: Houses the master launch files integrating the robot description, localization, and navigation nodes.
-* `/urdf`: Robot simulation and hardware description files (differential drive chassis configuration).
+* `my_robot_params.yaml`: Contains tuned costmap parameters, AMCL configuration, and planner settings for the Nav2 stack.
+* `slam.launch.py`: Houses the master launch files integrating the robot description, localization, and navigation nodes.
+* `robot.urdf.xacro`: Robot simulation and hardware description files (differential drive chassis configuration).
 
 ## 🔧 Future Milestone Deployments
 - [ ] Upload Rviz simulation screen captures of autonomous path execution.
