@@ -9,9 +9,6 @@ from launch.substitutions import Command
 def generate_launch_description():
     sllidar_pkg = get_package_share_directory('sllidar_ros2')
     slam_toolbox_pkg = get_package_share_directory('slam_toolbox')
-    
-
-
     xacro_file = "/home/ubuntu/hariri_ws/src/robot_description/urdf/robot.urdf.xacro"
     
     # Use xacro command to generate XML
@@ -28,13 +25,6 @@ def generate_launch_description():
             )
         ),
 
-        # ----  imu_launch --- 
-        IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(get_package_share_directory('ros2_mpu6050'), 'launch', 'ros2_mpu6050.launch.py')
-        ),  
-    ),
-        
         # Motor controller node
         Node(
             package='motor_controller',
@@ -42,10 +32,7 @@ def generate_launch_description():
             name='motor_controller',
             output='screen'
         ),
-
-
-       
-
+        
         # Node: Robot State Publisher
         Node(
             package='robot_state_publisher',
@@ -53,15 +40,6 @@ def generate_launch_description():
             output='screen',
             parameters=[params]
         ),
-
-        # Node(
-        #     package='joint_state_publisher',
-        #     executable='joint_state_publisher',
-        #     name='joint_state_publisher',
-        #     parameters=[params]
-        # ),
-        
-        
         
         # SLAM Toolbox (using its online async launch file)
         IncludeLaunchDescription(
